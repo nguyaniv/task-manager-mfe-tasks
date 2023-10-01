@@ -4,7 +4,7 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "https://gleeful-licorice-557f16.netlify.app",
+    publicPath: "https://main--gleeful-licorice-557f16.netlify.app/",
   },
 
   resolve: {
