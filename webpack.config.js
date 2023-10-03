@@ -4,7 +4,11 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "https://main--gleeful-licorice-557f16.netlify.app/",
+    // publicPath: "https://main--gleeful-licorice-557f16.netlify.app/",
+    publicPath:
+      argv.mode === "development"
+        ? "http://localhost:3001/"
+        : "https://main--gleeful-licorice-557f16.netlify.app/",
   },
 
   resolve: {
@@ -46,6 +50,7 @@ module.exports = (_, argv) => ({
       remotes: {},
       exposes: {
         "./TaskBoard": "./src/components/TaskBoard.jsx",
+        "./AddTask": "./src/components/AddTask.jsx",
       },
       shared: {
         ...deps,

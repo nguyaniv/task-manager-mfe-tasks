@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Task = ({ task }) => {
   return (
-    <div className=" w-full text-white px-1 grid text-base gap-y-2 border">
+    <div className="  bg-lightPurple py-3 px-2 text-white grid text-base gap-y-2 rounded">
+      <div className="text-lightGold">Task title</div>
       <div className="">{task.content}</div>
-      <div>Date</div>
+      <div className="text-gray-400 text-sm">March 05, 2022</div>
     </div>
   );
 };
 
 const Queue = ({ tasks }) => {
   return (
-    <div className="border py-5 px-5 grid gap-y-5">
-      <div className="text-white bg-blue-600 max-h-10">Queue</div>
-      {tasks.map((task) => (
+    <div className="border-5 bg-darkPurple py-5 px-3 flex flex-col gap-y-5 rounded">
+      <div className="text-white text-lg ">Queue</div>
+      {tasks?.map((task) => (
         <Task key={task.id} task={task} />
       ))}
     </div>
@@ -21,9 +22,9 @@ const Queue = ({ tasks }) => {
 };
 const InProgress = ({ tasks }) => {
   return (
-    <div className="border py-5 px-5 grid gap-y-5">
-      <div className="text-white bg-blue-600 max-h-10">In Progress</div>
-      {tasks.map((task) => (
+    <div className="border-5 bg-darkPurple py-5 px-2 flex flex-col gap-y-5 rounded">
+      <div className="text-white text-lg  ">In Progress</div>
+      {tasks?.map((task) => (
         <Task key={task.id} task={task} />
       ))}
     </div>
@@ -31,9 +32,9 @@ const InProgress = ({ tasks }) => {
 };
 const InTest = ({ tasks }) => {
   return (
-    <div className="border py-5 px-5 grid gap-y-5">
-      <div className="text-white bg-blue-600 max-h-10">In Test</div>
-      {tasks.map((task) => (
+    <div className="border-5 bg-darkPurple py-5 px-2 flex flex-col gap-y-5 rounded">
+      <div className="text-white text-lg  ">In Test</div>
+      {tasks?.map((task) => (
         <Task key={task.id} task={task} />
       ))}
     </div>
@@ -41,9 +42,9 @@ const InTest = ({ tasks }) => {
 };
 const Closed = ({ tasks }) => {
   return (
-    <div className="border py-5 px-5 grid gap-y-5">
-      <div className="text-white bg-blue-600 max-h-10">Closed</div>
-      {tasks.map((task) => (
+    <div className="border-5 bg-darkPurple py-5 px-2 flex flex-col gap-y-5 rounded">
+      <div className="text-white text-lg  ">Closed</div>
+      {tasks?.map((task) => (
         <Task key={task.id} task={task} />
       ))}
     </div>
@@ -58,16 +59,12 @@ const TaskBoard = ({ tasks }) => {
     closed: [],
   };
 
-  tasks.forEach((task) => {
+  tasks?.forEach((task) => {
     tasksByStatus[task.status].push(task);
-    // if (task.status === "Created") tasksByStatus.created.push(task);
-    // else if (task.status === "In Progress") tasksByStatus.inProgress.push(task);
-    // else if (task.status === "In Test") tasksByStatus.inTest.push(task);
-    // else if (task.status === "Closed") tasksByStatus.closed.push(task);
   });
 
   return (
-    <div className="grid grid-cols-4 w-full gap-x-5 ">
+    <div className="grid grid-cols-4 w-full gap-x-2 bg-lightPurple">
       <Queue tasks={tasksByStatus.created} />
       <InProgress tasks={tasksByStatus.inProgress} />
       <InTest tasks={tasksByStatus.inTest} />

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
 
 import "./index.scss";
 import TaskBoard from "./components/TaskBoard";
+import AddTask from "./components/AddTask";
 
-const tasks = [
+const usersTasks = [
   { id: "random_id", content: "Finish UI design", status: "created" },
   { id: "random_id2", content: "Get server side done.", status: "created" },
   { id: "random_id3", content: "Update Auth Service.", status: "created" },
@@ -23,10 +24,16 @@ const tasks = [
   { id: "random_id12", content: "Adding tests", status: "closed" },
 ];
 
-const App = () => (
-  <div className="mt-10 text-3xl mx-auto max-w-6xl">
-    <TaskBoard tasks={tasks} />
-  </div>
-);
+const App = () => {
+  const [tasks, setTasks] = useState(usersTasks);
+
+  return (
+    <div className="mt-10  text-3xl mx-auto max-w-7xl flex flex-col gap-y-2 min-h-screen ">
+      <AddTask setTasks={setTasks} />
+      <TaskBoard tasks={tasks} />
+    </div>
+  );
+};
+
 const root = createRoot(document.getElementById("app"));
 root.render(<App />);
